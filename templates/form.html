@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Builder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Enter Your Resume Details</h2>
+  <form action="/generate" method="post">
+    
+    <label>Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Phone:</label>
+    <input type="text" name="phone" required>
+
+    <label>About You (Summary):</label>
+    <textarea name="summary" rows="4"></textarea>
+
+    <label>Education:</label>
+    <input type="text" name="education" placeholder="e.g., B.Tech CSE - XYZ University">
+
+    <label>Skills (comma-separated):</label>
+    <input type="text" name="skills" placeholder="e.g., Python, C++, JavaScript">
+
+    <label>Projects:</label>
+    <textarea name="projects" rows="3" placeholder="Mention key projects"></textarea>
+
+    <label>Experience:</label>
+    <textarea name="experience" rows="3" placeholder="Internships, Part-time jobs, etc."></textarea>
+
+    <label>Certifications:</label>
+    <textarea name="certifications" rows="2" placeholder="Any courses or certificates"></textarea>
+
+    <button type="submit">Generate Resume</button>
+  </form>
+</body>
