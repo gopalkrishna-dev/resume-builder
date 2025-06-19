@@ -1,3 +1,5 @@
+import os
+import pdfkit
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -8,37 +10,26 @@ def form():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    data = {
-        'name': request.form['name'],
-        'email': request.form['email'],
-        'phone': request.form['phone'],
-        'summary': request.form['summary'],
-        'education': request.form['education'],
-        'skills': request.form['skills'],
-        'projects': request.form['projects'],
-        'experience': request.form['experience'],
-        'certifications': request.form['certifications']
-    }
+    # Collect form data (adjust as needed)
+    name = request.form['name']
+    email = request.form['email']
+    
+    rendered = render_template('resume_template.html', name=name, email=email)
 
-    # Render HTML with data
-    rendered = render_template('resume_template.html', **data)
+    # ✅ Detect platform and set wkhtmltopdf path
+    if os.name == 'nt':  # Windows (local)
+        config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
+    else:  # Render (Linux)
+        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 
-    # Configure wkhtmltopdf path
-    config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')  # ← your wkhtmltopdf path
-
-    # Generate PDF from rendered HTML
     pdf = pdfkit.from_string(rendered, False, configuration=config)
 
-    # Send PDF as downloadable file
-    response = make_response(pdf)
-    response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename=resume.pdf'
-
-    return response
-
+    return (
+        pdf,
+        200,
+        {'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=resume.pdf'}
+    )
 
 if __name__ == '__main__':
-   import os
-
-port = int(os.environ.get('PORT', 5000))
-app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
