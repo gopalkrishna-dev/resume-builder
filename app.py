@@ -18,7 +18,13 @@ def generate():
 
     # ✅ Detect platform and set wkhtmltopdf path
     if os.name == 'nt':  # Windows (local)
-        config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
+        import platform
+
+        if platform.system() == "Windows":
+           config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+        else:
+           config = pdfkit.configuration()  # Use system path on Render (Linux)
+
     else:  # Render (Linux)
         config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 
