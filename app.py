@@ -13,21 +13,14 @@ def generate():
     # Collect form data (adjust as needed)
     name = request.form['name']
     email = request.form['email']
-    
+
+    # Render resume with provided data
     rendered = render_template('resume_template.html', name=name, email=email)
 
-    # ✅ Detect platform and set wkhtmltopdf path
-    if os.name == 'nt':  # Windows (local)
-        import platform
+    # Use wkhtmltopdf from the standard Linux path on Render
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
 
-        if platform.system() == "Windows":
-           config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-        else:
-           config = pdfkit.configuration()  # Use system path on Render (Linux)
-
-    else:  # Render (Linux)
-        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-
+    # Generate PDF from HTML
     pdf = pdfkit.from_string(rendered, False, configuration=config)
 
     return (
@@ -37,7 +30,5 @@ def generate():
     )
 
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 10000))  # Render dynamically gives this
+    port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port)
-
