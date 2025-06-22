@@ -13,12 +13,14 @@ def generate():
     name = request.form['name']
     email = request.form['email']
     phone = request.form['phone']
-    about = request.form.get('about', '')
-    education = request.form.get('education', '')
-    skills = request.form.get('skills', '')
-    projects = request.form.get('projects', '')
-    experience = request.form.get('experience', '')
-    certifications = request.form.get('certifications', '')
+    about = request.form['about']
+    education = request.form['education']
+    skills = request.form['skills']
+    projects = request.form['projects']
+    experience = request.form['experience']
+    certifications = request.form['certifications']
+    languages = request.form['languages']
+    interests = request.form['interests']
 
     rendered = render_template(
         'resume_template.html',
@@ -30,10 +32,17 @@ def generate():
         skills=skills,
         projects=projects,
         experience=experience,
-        certifications=certifications
+        certifications=certifications,
+        languages=languages,
+        interests=interests
     )
 
-    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+    # Choose wkhtmltopdf path based on environment
+    if os.name == 'nt':
+        config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    else:
+        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+
     pdf = pdfkit.from_string(rendered, False, configuration=config)
 
     return (
@@ -41,8 +50,6 @@ def generate():
         200,
         {'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=resume.pdf'}
     )
-
-
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))

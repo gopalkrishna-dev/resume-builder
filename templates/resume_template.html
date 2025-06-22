@@ -5,51 +5,80 @@
     <title>Resume</title>
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            padding: 40px;
-            color: #333;
+            font-family: 'Rubik', sans-serif;
+            padding: 50px;
+            line-height: 1.7;
+            background: #fdfdfd;
+            color: #2c3e50;
         }
-        h1 {
-            font-size: 28px;
-            margin-bottom: 0;
+        h1, h2 {
+            color: #007bff;
         }
         .contact {
+            margin-bottom: 30px;
             font-size: 14px;
-            margin-bottom: 20px;
+            color: #555;
         }
-        h2 {
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-            margin-top: 20px;
+        section {
+            margin-bottom: 25px;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: #ccc;
+            margin: 20px 0;
         }
         p {
-            margin: 5px 0 10px;
+            margin: 0 0 10px;
         }
     </style>
 </head>
 <body>
     <h1>{{ name }}</h1>
     <div class="contact">
-        <strong>Email:</strong> {{ email }} |
+        <strong>Email:</strong> {{ email }}<br>
         <strong>Phone:</strong> {{ phone }}
     </div>
+    <hr>
 
-    <h2>About Me</h2>
-    <p>{{ about }}</p>
+    <section>
+        <h2>About Me</h2>
+        <p>{{ about }}</p>
+    </section>
 
-    <h2>Education</h2>
-    <p>{{ education }}</p>
+    <section>
+        <h2>Education</h2>
+        <p>{{ education }}</p>
+    </section>
 
-    <h2>Skills</h2>
-    <p>{{ skills }}</p>
+    <section>
+        <h2>Skills</h2>
+        <p>{{ skills }}</p>
+    </section>
 
-    <h2>Projects</h2>
-    <p>{{ projects }}</p>
+    <section>
+        <h2>Projects</h2>
+        <p>{{ projects }}</p>
+    </section>
 
-    <h2>Experience</h2>
-    <p>{{ experience }}</p>
+    <section>
+        <h2>Experience</h2>
+        <p>{{ experience }}</p>
+    </section>
 
-    <h2>Certifications</h2>
-    <p>{{ certifications }}</p>
+    <section>
+        <h2>Certifications</h2>
+        <p>{{ certifications }}</p>
+    </section>
+
+    <section>
+        <h2>Languages Known</h2>
+        <p>{{ languages }}</p>
+    </section>
+
+    <section>
+        <h2>Hobbies & Interests</h2>
+        <p>{{ interests }}</p>
+    </section>
 </body>
 </html>
