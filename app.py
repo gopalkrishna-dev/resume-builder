@@ -13,12 +13,24 @@ def generate():
     name = request.form['name']
     email = request.form['email']
     phone = request.form['phone']
+    about = request.form.get('about', '')
+    education = request.form.get('education', '')
+    skills = request.form.get('skills', '')
+    projects = request.form.get('projects', '')
+    experience = request.form.get('experience', '')
+    certifications = request.form.get('certifications', '')
 
     rendered = render_template(
         'resume_template.html',
         name=name,
         email=email,
-        phone=phone
+        phone=phone,
+        about=about,
+        education=education,
+        skills=skills,
+        projects=projects,
+        experience=experience,
+        certifications=certifications
     )
 
     config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
@@ -29,6 +41,7 @@ def generate():
         200,
         {'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=resume.pdf'}
     )
+
 
 
 if __name__ == '__main__':
