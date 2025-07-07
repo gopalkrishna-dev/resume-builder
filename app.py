@@ -15,7 +15,7 @@ def generate():
     phone = request.form['phone']
     address = request.form['address']
     photo = request.form['photo']
-    theme = request.form['theme']  # new theme dropdown
+    theme = request.form['theme']
     about = request.form['about']
     education = request.form['education']
     skills = request.form['skills']
@@ -25,12 +25,10 @@ def generate():
     certifications = request.form['certifications']
     languages = request.form['languages']
     interests = request.form['interests']
+    achievements = request.form['achievements']
+    links = request.form['links']
 
-    # choose the right template based on theme
-    if theme == "dark":
-        template_file = "resume_template_dark.html"
-    else:
-        template_file = "resume_template_light.html"
+    template_file = "resume_template_dark.html" if theme == "dark" else "resume_template_light.html"
 
     rendered = render_template(
         template_file,
@@ -47,10 +45,11 @@ def generate():
         internships=internships,
         certifications=certifications,
         languages=languages,
-        interests=interests
+        interests=interests,
+        achievements=achievements,
+        links=links
     )
 
-    # detect platform and use wkhtmltopdf path
     if os.name == 'nt':
         config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
     else:
