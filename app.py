@@ -10,57 +10,51 @@ def form():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    name = request.form['name']
-    email = request.form['email']
-    phone = request.form['phone']
-    address = request.form['address']
-    photo = request.form['photo']
-    theme = request.form['theme']
-    about = request.form['about']
-    education = request.form['education']
-    skills = request.form['skills']
-    projects = request.form['projects']
-    experience = request.form['experience']
-    internships = request.form['internships']
-    certifications = request.form['certifications']
-    languages = request.form['languages']
-    interests = request.form['interests']
-    achievements = request.form['achievements']
-    links = request.form['links']
+    data = {
+        "name": request.form.get('name', ''),
+        "email": request.form.get('email', ''),
+        "phone": request.form.get('phone', ''),
+        "address": request.form.get('address', ''),
+        "photo": request.form.get('photo', ''),
+        "theme": request.form.get('theme', 'light'),
+        "about": request.form.get('about', ''),
+        "education": request.form.get('education', ''),
+        "skills": request.form.get('skills', ''),
+        "projects": request.form.get('projects', ''),
+        "experience": request.form.get('experience', ''),
+        "internships": request.form.get('internships', ''),
+        "certifications": request.form.get('certifications', ''),
+        "languages": request.form.get('languages', ''),
+        "interests": request.form.get('interests', ''),
+        "achievements": request.form.get('achievements', ''),
+        "links": request.form.get('links', '')
+    }
 
-    template_file = "resume_template_dark.html" if theme == "dark" else "resume_template_light.html"
+    # Choose template based on theme
+    template_file = "resume_template_dark.html" if data["theme"] == "dark" else "resume_template_light.html"
 
-    rendered = render_template(
-        template_file,
-        name=name,
-        email=email,
-        phone=phone,
-        address=address,
-        photo=photo,
-        about=about,
-        education=education,
-        skills=skills,
-        projects=projects,
-        experience=experience,
-        internships=internships,
-        certifications=certifications,
-        languages=languages,
-        interests=interests,
-        achievements=achievements,
-        links=links
+    # Render the HTML using selected theme
+    rendered_html = render_template(template_file, **data)
+
+    # Configure PDF generation (based on OS)
+    wkhtml_path = (
+        'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe' if os.name == 'nt'
+        else '/usr/bin/wkhtmltopdf'
     )
+    config = pdfkit.configuration(wkhtmltopdf=wkhtml_path)
 
-    if os.name == 'nt':
-        config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-    else:
-        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+    # Generate PDF from rendered HTML
+    pdf = pdfkit.from_string(rendered_html, False, configuration=config)
 
-    pdf = pdfkit.from_string(rendered, False, configuration=config)
+    print("✅ PDF generated successfully")
 
     return (
         pdf,
         200,
-        {'Content-Type': 'application/pdf', 'Content-Disposition': 'inline; filename=resume.pdf'}
+        {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': f'inline; filename={data["name"].replace(" ", "_")}_resume.pdf'
+        }
     )
 
 if __name__ == '__main__':

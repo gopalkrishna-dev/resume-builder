@@ -2,91 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resume Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
-      display: flex;
-      justify-content: center;
-      padding: 40px;
-    }
-    .container {
-      background: #ffffff;
-      padding: 35px;
-      border-radius: 15px;
-      width: 100%;
-      max-width: 750px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #2c3e50;
-    }
-    label {
-      display: block;
-      margin-top: 18px;
-      font-weight: 500;
-      color: #34495e;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      transition: border-color 0.3s;
-    }
-    input:focus, textarea:focus, select:focus {
-      border-color: #007bff;
-      outline: none;
-    }
-    button {
-      width: 100%;
-      margin-top: 30px;
-      padding: 14px;
-      background: #4CAF50;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #388e3c;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #7f8c8d;
-      font-size: 14px;
-    }
-  </style>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <form class="container" action="/generate" method="post">
     <h2>Professional Resume Generator</h2>
 
     <label for="name">Full Name</label>
-    <input type="text" name="name" required>
+    <input type="text" name="name" placeholder="e.g. Gopal Krishna" required>
 
     <label for="email">Email Address</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" placeholder="e.g. yourname@email.com" required>
 
     <label for="phone">Phone Number</label>
-    <input type="text" name="phone" required>
+    <input type="text" name="phone" placeholder="e.g. 9876543210" required>
 
     <label for="address">Address</label>
-    <textarea name="address" rows="2"></textarea>
+    <textarea name="address" rows="2" placeholder="Full postal address"></textarea>
 
-    <label for="photo">Photo URL (public image link)</label>
-    <input type="text" name="photo">
+    <label for="photo">Photo URL (optional)</label>
+    <input type="text" name="photo" placeholder="Paste direct image link">
 
     <label for="theme">Choose Resume Theme</label>
     <select name="theme">
@@ -95,37 +35,37 @@
     </select>
 
     <label for="about">About Me</label>
-    <textarea name="about" rows="3"></textarea>
+    <textarea name="about" rows="3" placeholder="Brief professional summary"></textarea>
 
     <label for="education">Education</label>
-    <textarea name="education" rows="3"></textarea>
+    <textarea name="education" rows="3" placeholder="E.g. B.Tech CSE - XYZ University"></textarea>
 
     <label for="skills">Skills</label>
-    <textarea name="skills" rows="3"></textarea>
+    <textarea name="skills" rows="3" placeholder="List of skills (comma-separated or line-wise)"></textarea>
 
     <label for="projects">Projects</label>
-    <textarea name="projects" rows="3"></textarea>
+    <textarea name="projects" rows="3" placeholder="Briefly describe your main projects"></textarea>
 
     <label for="experience">Experience</label>
-    <textarea name="experience" rows="3"></textarea>
+    <textarea name="experience" rows="3" placeholder="Your job or freelance experience"></textarea>
 
     <label for="internships">Internships</label>
-    <textarea name="internships" rows="3"></textarea>
+    <textarea name="internships" rows="3" placeholder="Any internship experiences"></textarea>
 
     <label for="certifications">Certifications</label>
-    <textarea name="certifications" rows="3"></textarea>
+    <textarea name="certifications" rows="3" placeholder="List of certifications"></textarea>
 
     <label for="languages">Languages Known</label>
-    <textarea name="languages" rows="2"></textarea>
+    <textarea name="languages" rows="2" placeholder="E.g. Hindi, English, Bhojpuri"></textarea>
 
     <label for="interests">Hobbies & Interests</label>
-    <textarea name="interests" rows="2"></textarea>
+    <textarea name="interests" rows="2" placeholder="E.g. Gaming, Editing, Learning"></textarea>
 
     <label for="achievements">Achievements</label>
-    <textarea name="achievements" rows="2"></textarea>
+    <textarea name="achievements" rows="2" placeholder="Any awards or achievements"></textarea>
 
     <label for="links">Links (GitHub, LinkedIn, Portfolio etc)</label>
-    <textarea name="links" rows="2"></textarea>
+    <textarea name="links" rows="2" placeholder="Paste URLs with names if needed"></textarea>
 
     <button type="submit">Download Resume PDF</button>
     <div class="footer">Designed with ❤️ by Gopal</div>
