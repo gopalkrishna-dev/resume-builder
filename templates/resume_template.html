@@ -6,79 +6,71 @@
     <style>
         body {
             font-family: 'Rubik', sans-serif;
-            padding: 50px;
-            line-height: 1.7;
-            background: #fdfdfd;
-            color: #2c3e50;
+            padding: 40px;
+            background-color: #f8f9fa;
+            color: #212529;
         }
-        h1, h2 {
-            color: #007bff;
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .header img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #007bff;
+        }
+        h1 {
+            color: #343a40;
+            margin: 0;
         }
         .contact {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-size: 14px;
-            color: #555;
         }
         section {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+        p {
+            margin: 0 0 8px;
+            white-space: pre-line;
         }
         hr {
-            border: none;
+            border: 0;
             height: 1px;
             background: #ccc;
             margin: 20px 0;
         }
-        p {
-            margin: 0 0 10px;
-        }
     </style>
 </head>
 <body>
-    <h1>{{ name }}</h1>
-    <div class="contact">
-        <strong>Email:</strong> {{ email }}<br>
-        <strong>Phone:</strong> {{ phone }}
+    <div class="header">
+        {% if photo %}<img src="{{ photo }}" alt="Profile Photo">{% endif %}
+        <div>
+            <h1>{{ name }}</h1>
+            <div class="contact">
+                <strong>Email:</strong> {{ email }}<br>
+                <strong>Phone:</strong> {{ phone }}<br>
+                <strong>Address:</strong> {{ address }}
+            </div>
+        </div>
     </div>
     <hr>
 
-    <section>
-        <h2>About Me</h2>
-        <p>{{ about }}</p>
-    </section>
-
-    <section>
-        <h2>Education</h2>
-        <p>{{ education }}</p>
-    </section>
-
-    <section>
-        <h2>Skills</h2>
-        <p>{{ skills }}</p>
-    </section>
-
-    <section>
-        <h2>Projects</h2>
-        <p>{{ projects }}</p>
-    </section>
-
-    <section>
-        <h2>Experience</h2>
-        <p>{{ experience }}</p>
-    </section>
-
-    <section>
-        <h2>Certifications</h2>
-        <p>{{ certifications }}</p>
-    </section>
-
-    <section>
-        <h2>Languages Known</h2>
-        <p>{{ languages }}</p>
-    </section>
-
-    <section>
-        <h2>Hobbies & Interests</h2>
-        <p>{{ interests }}</p>
-    </section>
+    <section><h2>About Me</h2><p>{{ about }}</p></section>
+    <section><h2>Education</h2><p>{{ education }}</p></section>
+    <section><h2>Skills</h2><p>{{ skills }}</p></section>
+    <section><h2>Projects</h2><p>{{ projects }}</p></section>
+    <section><h2>Experience</h2><p>{{ experience }}</p></section>
+    <section><h2>Internships</h2><p>{{ internships }}</p></section>
+    <section><h2>Certifications</h2><p>{{ certifications }}</p></section>
+    <section><h2>Languages Known</h2><p>{{ languages }}</p></section>
+    <section><h2>Hobbies & Interests</h2><p>{{ interests }}</p></section>
 </body>
 </html>

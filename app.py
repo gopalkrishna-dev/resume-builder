@@ -13,11 +13,14 @@ def generate():
     name = request.form['name']
     email = request.form['email']
     phone = request.form['phone']
+    address = request.form['address']
+    photo = request.form['photo']
     about = request.form['about']
     education = request.form['education']
     skills = request.form['skills']
     projects = request.form['projects']
     experience = request.form['experience']
+    internships = request.form['internships']
     certifications = request.form['certifications']
     languages = request.form['languages']
     interests = request.form['interests']
@@ -27,17 +30,20 @@ def generate():
         name=name,
         email=email,
         phone=phone,
+        address=address,
+        photo=photo,
         about=about,
         education=education,
         skills=skills,
         projects=projects,
         experience=experience,
+        internships=internships,
         certifications=certifications,
         languages=languages,
         interests=interests
     )
 
-    # Choose wkhtmltopdf path based on environment
+    # wkhtmltopdf path config
     if os.name == 'nt':
         config = pdfkit.configuration(wkhtmltopdf='C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
     else:
