@@ -33,7 +33,7 @@
       font-weight: 500;
       color: #34495e;
     }
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       margin-top: 5px;
@@ -42,7 +42,7 @@
       font-size: 15px;
       transition: border-color 0.3s;
     }
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
       border-color: #007bff;
       outline: none;
     }
@@ -87,6 +87,12 @@
 
     <label for="photo">Photo URL (public image link)</label>
     <input type="text" name="photo">
+
+    <label for="theme">Choose Resume Theme</label>
+    <select name="theme">
+      <option value="light">Light (Default)</option>
+      <option value="dark">Dark</option>
+    </select>
 
     <label for="about">About Me</label>
     <textarea name="about" rows="3"></textarea>
