@@ -24,8 +24,8 @@
     }
     .header {
       display: flex;
-      align-items: flex-start;
-      gap: 20px;
+      align-items: center;
+      gap: 30px;
       margin-bottom: 30px;
     }
     .header img {
@@ -37,12 +37,12 @@
     }
     h1 {
       color: #ffffff;
-      margin: 0;
+      margin: 0 0 10px;
     }
     .contact {
-      margin-bottom: 10px;
       font-size: 14px;
       color: #ccc;
+      line-height: 1.5;
     }
     .section {
       margin-bottom: 20px;
@@ -70,7 +70,9 @@
   </style>
 </head>
 <body>
+  {% for section in sections %}
   <div class="page">
+    {% if loop.first %}
     <div class="header">
       {% if photo %}<img src="{{ photo }}" alt="Profile Photo">{% endif %}
       <div>
@@ -82,18 +84,9 @@
         </div>
       </div>
     </div>
-
-    {% if about.strip() %}<div class="section"><h2>About Me</h2><p>{{ about }}</p></div>{% endif %}
-    {% if education.strip() %}<div class="section"><h2>Education</h2><p>{{ education }}</p></div>{% endif %}
-    {% if skills.strip() %}<div class="section"><h2>★ Skills</h2><p>{{ skills }}</p></div>{% endif %}
-    {% if projects.strip() %}<div class="section"><h2>➤ Projects</h2><p>{{ projects }}</p></div>{% endif %}
-    {% if experience.strip() %}<div class="section"><h2>💼 Experience</h2><p>{{ experience }}</p></div>{% endif %}
-    {% if internships.strip() %}<div class="section"><h2>🔧 Internships</h2><p>{{ internships }}</p></div>{% endif %}
-    {% if certifications.strip() %}<div class="section"><h2>🏅 Certifications</h2><p>{{ certifications }}</p></div>{% endif %}
-    {% if languages.strip() %}<div class="section"><h2>🌍 Languages Known</h2><p>{{ languages }}</p></div>{% endif %}
-    {% if interests.strip() %}<div class="section"><h2>🎨 Hobbies & Interests</h2><p>{{ interests }}</p></div>{% endif %}
-    {% if achievements.strip() %}<div class="section"><h2>🏆 Achievements</h2><p>{{ achievements }}</p></div>{% endif %}
-    {% if links.strip() %}<div class="section"><h2>🔗 Links</h2><p>{{ links }}</p></div>{% endif %}
+    {% endif %}
+    {{ section|safe }}
   </div>
+  {% endfor %}
 </body>
 </html>
